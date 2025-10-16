@@ -6,7 +6,7 @@
 /*   By: nluchini <nluchini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 14:14:17 by nluchini          #+#    #+#             */
-/*   Updated: 2025/10/14 16:21:08 by nluchini         ###   ########.fr       */
+/*   Updated: 2025/10/15 11:02:47 by nluchini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ std::string Contact::getDarkestSecret() const {
 	return _darkestSecret;
 }
 
-bool Contact::operator==(const Contact& other) const {
+bool Contact::operator==(const Contact& other) const
+{	
 	return _firstName == other._firstName &&
 		   _lastName == other._lastName &&
 		   _nickname == other._nickname &&
-		   _phoneNumber == other._phoneNumber &&
 		   _darkestSecret == other._darkestSecret;
 }
 

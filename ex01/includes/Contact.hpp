@@ -6,7 +6,7 @@
 /*   By: nluchini <nluchini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 14:14:21 by nluchini          #+#    #+#             */
-/*   Updated: 2025/10/14 16:20:54 by nluchini         ###   ########.fr       */
+/*   Updated: 2025/10/15 12:52:29 by nluchini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ private:
 public:
 	Contact() = default;
 	Contact(const Contact& other) = default;
-	~Contact() {};
+	~Contact() = default;
 	void setFirstName(const std::string &firstName);
 	void setLastName(const std::string &lastName);
 	void setNickname(const std::string &nickname);

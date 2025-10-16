@@ -6,7 +6,7 @@
 /*   By: nluchini <nluchini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 20:14:43 by nluchini          #+#    #+#             */
-/*   Updated: 2025/10/14 16:21:54 by nluchini         ###   ########.fr       */
+/*   Updated: 2025/10/15 19:07:35 by nluchini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,21 +19,18 @@
 class PhoneBook
 {
 private:
-	Contact _contacts[8];
+	const static int MAX_CONTACTS = 8;
+	Contact _contacts[MAX_CONTACTS];
 	int _currentIndex;
-	
-	void setNewContact();
+	int _size;
 	
 public:
-	PhoneBook() = default;
-	~PhoneBook();
+	PhoneBook() : _currentIndex(0), _size(0) {};
+	~PhoneBook() = default;
 	
-	const Contact& getContacts(int index) const;
-	const Contact* getAllContacts() const;
-	std::optional<Contact> getContactByName(std::string name, std::string last_name);
-	const Contact& getContactBySurname(std::string name) const;
-	const Contact& getContactsByLastName(std::string last_name) const;
-	int getIndex(Contact contact);
+	int getSize() const;
+	int getMaxContacts() const { return MAX_CONTACTS; }
+	std::optional<Contact> getContactByIndex(int index) const;
 	void addContact(Contact contact);
 };
 

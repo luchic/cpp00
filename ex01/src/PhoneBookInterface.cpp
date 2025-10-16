@@ -6,7 +6,7 @@
 /*   By: nluchini <nluchini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 11:21:49 by nluchini          #+#    #+#             */
-/*   Updated: 2025/10/14 17:00:00 by nluchini         ###   ########.fr       */
+/*   Updated: 2025/10/15 18:41:51 by nluchini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,26 @@ void PhoneBookInterface::run()
 
 	while (true) {
 		std::cout << "Enter command (ADD, SEARCH, EXIT): ";
-		if (!std::getline(std::cin, command)) {
+		if (!std::getline(std::cin, command))
+		{
 			std::cout << "\nEnd of input detected. Exiting." << std::endl;
 			break;
 		}
-		if (command == "ADD") {
+		if (command == "ADD")
+		{
 			_handleAddCommand();
-		} else if (command == "SEARCH") {
+		}
+		else if (command == "SEARCH")
+		{
 			_handleSearchCommand();
-		} else if (command == "EXIT") {
+		}
+		else if (command == "EXIT")
+		{
 			std::cout << "Exiting PhoneBook." << std::endl;
 			break;
-		} else {
+		}
+		else
+		{
 			std::cout << "Invalid command. Please try again." << std::endl;
 		}
 	}
@@ -66,14 +74,24 @@ void PhoneBookInterface::_handleAddCommand()
 
 void PhoneBookInterface::_handleSearchCommand()
 {
-	std::string name;
-	std::string last_name;
-
-	name = _getStringInput("Enter First Name: ");
-	last_name = _getStringInput("Enter Last Name: ");
-	auto contact = _phoneBook.getContactByName(name, last_name);
+	_displayAllContacts();
+	
+	if (_phoneBook.getSize() == 0)
+	{
+		std::cout << "No contacts available to search." << std::endl;
+		return;
+	}
+	int index = _getIntInput("Enter the index of the contact to view details: ");
+	auto contact = _phoneBook.getContactByIndex(index);
 	if (contact.has_value())
-		_displayContact(contact.value());
+	{
+		std::cout << "Contact found:" << std::endl;
+		std::cout << "First Name: " << contact->getFirstName() << std::endl;
+		std::cout << "Last Name: " << contact->getLastName() << std::endl;
+		std::cout << "Nickname: " << contact->getNickname() << std::endl;
+		std::cout << "Phone Number: " << contact->getPhoneNumber() << std::endl;
+		std::cout << "Darkest Secret: " << contact->getDarkestSecret() << std::endl;
+	}
 	else
 		std::cout << "Contact not found." << std::endl;
 }
@@ -83,8 +101,8 @@ std::string PhoneBookInterface::_getInput(const std::string& prompt)
 	std::string input;
 	do {
 		std::cout << prompt;
-		if (!std::getline(std::cin, input)) {
-			std::cout << "\nEnd of input detected. Returning to main menu." << std::endl;
+		if (!std::getline(std::cin, input))
+		{
 			return "";
 		}
 		if (input.empty()) {
@@ -95,20 +113,44 @@ std::string PhoneBookInterface::_getInput(const std::string& prompt)
 	return input;
 }
 
+int PhoneBookInterface::_getIntInput(const std::string& prompt)
+{
+	std::string input;
+	std::cout << prompt;
+	do {
+		std::cout << prompt;
+		if (!std::getline(std::cin, input))
+		{
+			return -1;
+		}
+		if (input.empty())
+		{
+			std::cout << "Index value cannot be empty. Please try again." << std::endl;
+		} else if (!_isValidInt(input))
+		{
+			std::cout << "Index value must be a valid integer. Please try again." << std::endl;
+			input = "";
+		}
+	} while (input.empty());
+	return std::stoi(input);
+}
+
 std::string PhoneBookInterface::_getStringInput(const std::string& prompt)
 {
 	std::string input;
 	do {
 		std::cout << prompt;
-		if (!std::getline(std::cin, input)) {
-			std::cout << "\nEnd of input detected. Returning to main menu." << std::endl;
+		if (!std::getline(std::cin, input))
+		{
 			return "";
 		}
-		if (input.empty()) {
+		if (input.empty())
+		{
 			std::cout << "Name cannot be empty. Please try again." << std::endl;
-		} else if (!_isValidName(input)) {
+		} else if (!_isValidName(input))
+		{
 			std::cout << "Name can only contain letters and spaces. Please try again." << std::endl;
-			input = ""; // Reset to continue loop
+			input = "";
 		}
 	} while (input.empty());
 	return input;
@@ -119,15 +161,18 @@ std::string PhoneBookInterface::_getPhoneInput(const std::string& prompt)
 	std::string input;
 	do {
 		std::cout << prompt;
-		if (!std::getline(std::cin, input)) {
-			std::cout << "\nEnd of input detected. Returning to main menu." << std::endl;
+		if (!std::getline(std::cin, input))
+		{
 			return "";
 		}
-		if (input.empty()) {
+		if (input.empty())
+		{
 			std::cout << "Phone number cannot be empty. Please try again." << std::endl;
-		} else if (!_isValidPhone(input)) {
+		}
+		else if (!_isValidPhone(input))
+		{
 			std::cout << "Phone number can only contain digits, spaces, +, -, (, ). Please try again." << std::endl;
-			input = ""; // Reset to continue loop
+			input = "";
 		}
 	} while (input.empty());
 	return input;
@@ -136,7 +181,8 @@ std::string PhoneBookInterface::_getPhoneInput(const std::string& prompt)
 bool PhoneBookInterface::_isValidName(const std::string& name)
 {
 	for (char c : name) {
-		if (!std::isalpha(c) && c != ' ' && c != '-' && c != '\'') {
+		if (!std::isalpha(c) && c != ' ' && c != '-' && c != '\'')
+		{
 			return false;
 		}
 	}
@@ -146,7 +192,19 @@ bool PhoneBookInterface::_isValidName(const std::string& name)
 bool PhoneBookInterface::_isValidPhone(const std::string& phone)
 {
 	for (char c : phone) {
-		if (!std::isdigit(c) && c != ' ' && c != '-' && c != '+' && c != '(' && c != ')') {
+		if (!std::isdigit(c) && c != ' ' && c != '-'
+			&& c != '+' && c != '(' && c != ')')
+		{
+			return false;
+		}
+	}
+	return true;
+}
+
+bool PhoneBookInterface::_isValidInt(const std::string& input)
+{
+	for (char c : input) {
+		if (!std::isdigit(c)) {
 			return false;
 		}
 	}
@@ -155,25 +213,41 @@ bool PhoneBookInterface::_isValidPhone(const std::string& phone)
 
 void PhoneBookInterface::_displayValue(const std::string& value)
 {
-	if (value.length() > 10) {
+	if (value.length() > 10)
+	{
 		std::cout << value.substr(0, 8) << ".";
-	} else {
-		std::cout << value << std::setw(10 - value.length());
+	}
+	else
+	{
+		std::cout << std::setw(10) << value;
 	}
 }
 
-void PhoneBookInterface::_displayContact(const Contact& contact)
+void PhoneBookInterface::_displayContact(int index, const Contact& contact)
 {
-	int index = _phoneBook.getIndex(contact);
 	std::string name = contact.getFirstName();
 	std::string last_name = contact.getLastName();
 	std::string nickname = contact.getNickname();
-	std::cout << "Contact found at index " << index << ":\n";
-	std::cout << "| " << index << " |";
+	
+	std::cout << "|" << std::setw(10) << index << "|";
 	_displayValue(name);
 	std::cout << "|";
 	_displayValue(last_name);
 	std::cout << "|";
 	_displayValue(nickname);
 	std::cout << "|" << std::endl;
+}
+
+void PhoneBookInterface::_displayAllContacts()
+{
+	std::cout << "┌----------┬----------┬----------┬----------┐\n";
+	std::cout << "|     Index|First Name| Last Name|  Nickname|\n";
+	std::cout << "|----------┼----------┼----------┼----------|\n";
+	for (int i = 0; i < _phoneBook.getSize(); i++) {
+		auto cnt = _phoneBook.getContactByIndex(i);
+		if (!cnt.has_value())
+			break;
+		_displayContact(i, cnt.value());
+	}
+	std::cout << "└----------┴----------┴----------┴----------┘" << std::endl; 
 }
