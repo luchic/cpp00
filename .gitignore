@@ -1,0 +1,6 @@
+out/
+*.o
+.vscode/
+bank
+megaphone
+phone
