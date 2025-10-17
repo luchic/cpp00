@@ -6,7 +6,7 @@
 /*   By: nluchini <nluchini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 12:05:50 by nluchini          #+#    #+#             */
-/*   Updated: 2025/10/12 13:44:04 by nluchini         ###   ########.fr       */
+/*   Updated: 2025/10/17 21:32:57 by nluchini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,10 @@ int main(int argc, char **argv)
 {
 	std::string str;
 	if (argc == 1)
+	{
+		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
 		return 0;
+	}
 	for (int i = 1; i < argc; i++)
 	{
 		str = argv[i];
