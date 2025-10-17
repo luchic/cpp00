@@ -6,12 +6,12 @@
 /*   By: nluchini <nluchini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 14:14:21 by nluchini          #+#    #+#             */
-/*   Updated: 2025/10/15 12:52:29 by nluchini         ###   ########.fr       */
+/*   Updated: 2025/10/17 21:34:26 by nluchini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONTACT_HPP
-#define CONTACT_HPP
+#ifndef __CONTACT_H__
+#define __CONTACT_H__
 
 #include <string>
 

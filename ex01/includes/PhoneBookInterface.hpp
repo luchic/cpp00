@@ -6,12 +6,12 @@
 /*   By: nluchini <nluchini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/12 20:14:11 by nluchini          #+#    #+#             */
-/*   Updated: 2025/10/15 13:07:03 by nluchini         ###   ########.fr       */
+/*   Updated: 2025/10/17 21:34:48 by nluchini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHONEBOOKINTERFACE_HPP
-#define PHONEBOOKINTERFACE_HPP
+#ifndef __PHONEBOOKINTERFACE_H__
+#define __PHONEBOOKINTERFACE_H__
 
 #include "PhoneBook.hpp"
 
