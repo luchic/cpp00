@@ -13,7 +13,7 @@ SRCS =	main.cpp \
 
 OBJS = $(addprefix $(OUTDIR)/, $(SRCS:.cpp=.o))
 DOBJS = $(addprefix $(OUTDIR_DEBUG)/, $(SRCS:.cpp=.o))
-INCFLAGS	= -I$(CURDIR)/$(INCLUDES)
+INCFLAGS = -I$(INCLUDES)
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++17
@@ -47,4 +47,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re debug

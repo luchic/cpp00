@@ -8,10 +8,9 @@ INCLUDES = includes
 SRCS =	tests.cpp \
 		Account.cpp
 
-VPATH		= $(CURDIR)/$(SRCDIR)
-OBJS		= $(addprefix $(OUTDIR)/, $(SRCS:.cpp=.o))
+OBJS = $(addprefix $(OUTDIR)/, $(SRCS:.cpp=.o))
 
-INCFLAGS	= -I$(CURDIR)/$(INCLUDES)
+INCFLAGS = -I$(INCLUDES)
 
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++17
@@ -24,7 +23,7 @@ $(NAME): $(OUTDIR) $(OBJS)
 $(OUTDIR):
 	mkdir -p $(OUTDIR)
 
-$(OUTDIR)/%.o: %.cpp
+$(OUTDIR)/%.o: $(SRCDIR)/%.cpp
 	$(CXX) $(CXXFLAGS) $(INCFLAGS) -c $< -o $@
 
 clean:

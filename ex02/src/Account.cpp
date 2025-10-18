@@ -6,7 +6,7 @@
 /*   By: nluchini <nluchini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 18:09:21 by nluchini          #+#    #+#             */
-/*   Updated: 2025/10/17 21:30:56 by nluchini         ###   ########.fr       */
+/*   Updated: 2025/10/18 11:20:35 by nluchini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ Account::Account(int initial_deposit) :
 	_nbAccounts++;
 	_totalAmount += initial_deposit;
 	_displayTimestamp();
-	std::cout << "index: " << _accountIndex
+	std::cout << "index:" << _accountIndex
 			  << ";amount:" << _amount
 			  << ";created" << std::endl;
 }
@@ -37,7 +37,7 @@ Account::Account(int initial_deposit) :
 Account::~Account(void)
 {
 	_displayTimestamp();
-	std::cout << "index: " << _accountIndex
+	std::cout << "index:" << _accountIndex
 			  << ";amount:" << _amount
 			  << ";closed" << std::endl;
 	_nbAccounts--;
@@ -80,7 +80,7 @@ void	Account::makeDeposit(int deposit)
 	_totalNbDeposits++;
 	_totalAmount += deposit;
 	_displayTimestamp();
-	std::cout << "index: " << _accountIndex
+	std::cout << "index:" << _accountIndex
 			  << ";p_amount:" << (_amount - deposit)
 			  << ";deposit:" << deposit
 			  << ";amount:" << _amount
@@ -92,7 +92,7 @@ bool	Account::makeWithdrawal(int withdrawal)
 	_displayTimestamp();
 	if (withdrawal > _amount)
 	{
-		std::cout << "index: " << _accountIndex
+		std::cout << "index:" << _accountIndex
 				  << ";p_amount:" << _amount
 				  << ";withdrawal:refused" << std::endl;
 		return false;
@@ -101,7 +101,7 @@ bool	Account::makeWithdrawal(int withdrawal)
 	_nbWithdrawals++;
 	_totalNbWithdrawals++;
 	_totalAmount -= withdrawal;
-	std::cout << "index: " << _accountIndex
+	std::cout << "index:" << _accountIndex
 			  << ";p_amount:" << (_amount + withdrawal)
 			  << ";withdrawal:" << withdrawal
 			  << ";amount:" << _amount
