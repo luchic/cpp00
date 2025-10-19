@@ -6,7 +6,7 @@
 /*   By: nluchini <nluchini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 11:21:49 by nluchini          #+#    #+#             */
-/*   Updated: 2025/10/15 18:41:51 by nluchini         ###   ########.fr       */
+/*   Updated: 2025/10/19 12:10:38 by nluchini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,7 @@ std::string PhoneBookInterface::_getPhoneInput(const std::string& prompt)
 bool PhoneBookInterface::_isValidName(const std::string& name)
 {
 	for (char c : name) {
-		if (!std::isalpha(c) && c != ' ' && c != '-' && c != '\'')
+		if (!std::isalpha(c) && c != ' ')
 		{
 			return false;
 		}
@@ -192,8 +192,7 @@ bool PhoneBookInterface::_isValidName(const std::string& name)
 bool PhoneBookInterface::_isValidPhone(const std::string& phone)
 {
 	for (char c : phone) {
-		if (!std::isdigit(c) && c != ' ' && c != '-'
-			&& c != '+' && c != '(' && c != ')')
+		if (!std::isdigit(c))
 		{
 			return false;
 		}
